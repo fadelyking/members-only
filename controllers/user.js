@@ -27,7 +27,7 @@ exports.user_create_post = [
 			last_name: req.body.name,
 			email: req.body.email,
 			password: req.body.password,
-			membership: 0,
+			membership_status: 0,
 		});
 
 		if (!errors.isEmpty()) {
