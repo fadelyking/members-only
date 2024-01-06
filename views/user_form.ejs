@@ -15,6 +15,17 @@
 			<input type="text" name="email" />
 			<label for="password">Password:</label>
 			<input type="password" name="password" />
+            <label for="submit">Submit</label>
+			<input type="submit" name="submit" />
+            
 		</form>
+
+        <% if (locals.errors) { %>
+            <% for (let error of locals.errors) { %>
+                <ul>
+                <li><%= error.msg %></li>
+            </ul>
+            <% } %>
+        <% } %>
 	</body>
 </html>
