@@ -7,6 +7,7 @@ const UserSchema = new Schema({
 	email: String,
 	password: String,
 	membership_status: Number,
+	admin: Boolean,
 });
 
 UserSchema.virtual("full_name").get(function () {
