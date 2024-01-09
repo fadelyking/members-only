@@ -7,7 +7,31 @@
 </head>
 <body>
     <h1>Messages</h1>
-    <% if (user) { %>
+
+    <% if (user && user.admin) { %>
+        <% if (messages.length > 0) { %>
+            <% for (let message of messages) { %>
+                <ul>
+                    <li>Title: <%= message.title %></li>
+                    <li>Message: <%= message.text %></li>
+                    <li>Time: <%= message.time %></li>
+                    <li>Author: <%= message.user.email %></li>
+                    <button class="delete">Delete</button>
+                </ul>
+
+            <% } %>
+        <% } else { %>
+            <p>No messages available. Start a conversation!</p>
+        <% } %>
+        <form action="" method="post">
+            <label for="title">Title:</label>
+            <input type="text" name="title">
+            <label for="message">Message:</label>
+            <input type="text" name="text">
+            <label for="submit">Submit:</label>
+            <input type="submit" name="submit" />
+        </form>
+    <% } else if (user) { %>
         <% if (messages.length > 0) { %>
             <% for (let message of messages) { %>
                 <ul>
