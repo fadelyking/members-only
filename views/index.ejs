@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messages</title>
+</head>
+<body>
+    <h1>Messages</h1>
+    <% if (user) { %>
+        <% if (messages.length > 0) { %>
+            <% for (let message of messages) { %>
+                <ul>
+                    <li>Title: <%= message.title %></li>
+                    <li>Message: <%= message.text %></li>
+                    <li>Time: <%= message.time %></li>
+                    <li>Author: <%= message.user %></li>
+                </ul>
+            <% } %>
+        <% } else { %>
+            <p>No messages available. Start a conversation!</p>
+        <% } %>
+        <form action="" method="post">
+            <label for="title">Title:</label>
+            <input type="text" name="title">
+            <label for="message">Message:</label>
+            <input type="text" name="text">
+            <label for="submit">Submit:</label>
+            <input type="submit" name="submit" />
+        </form>
+    <% } else if (!user) { %>
+        <% if (messages.length > 0) { %>
+            <% for (let message of messages) { %>
+                <ul>
+                    <li>Title: <%= message.title %></li>
+                    <li>Message: <%= message.text %></li>
+                </ul>
+            <% } %>
+        <% } else { %>
+            <p>No messages available.</p>
+        <% } %>
+    <% } %>
+</body>
+</html>
