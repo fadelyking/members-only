@@ -58,7 +58,7 @@ exports.user_create_post = [
 ];
 
 exports.user_club_get = (req, res, next) => {
-	res.render("club.ejs");
+	res.render("club");
 };
 
 exports.user_club_post = [
@@ -92,8 +92,8 @@ exports.user_login_post = [
 		} else {
 			console.log("success");
 			return passport.authenticate("local", {
-				successRedirect: "/sign-up",
-				failureRedirect: "/login",
+				successRedirect: "/",
+				failureRedirect: "/",
 				failureMessage: true,
 			});
 		}
