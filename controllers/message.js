@@ -4,9 +4,9 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 exports.index = asyncHandler(async (req, res, next) => {
-	const users = User.find().exec();
-	const messages = Message.find().populate("user").exec();
-
+	const messages = await Message.find().populate("user").exec();
+	console.log(messages);
+	console.log("hi");
 	res.render("index", { messages: messages, user: req.user });
 });
 
@@ -26,7 +26,6 @@ exports.message_create_post = [
 			user: req.user._id,
 		});
 
-		console.log(message);
 		if (!errors.isEmpty()) {
 			res.render("index", { messages: messages, errors: errors.array() });
 		}
