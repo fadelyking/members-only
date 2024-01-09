@@ -6,13 +6,14 @@ module.exports = function (passport) {
 	passport.use(
 		new LocalStrategy(async (username, password, done) => {
 			try {
-				console.log("local strategy works");
-				const user = await User.findOne({ username: username });
+				const user = await User.findOne({ email: username });
 				if (!user) {
 					return done(null, false, { message: "Incorrect username" });
 				}
+				console.log(user);
 				const match = await bcrypt.compare(password, user.password);
 				if (!match) {
+					console.log("incorrect password");
 					// passwords do not match!
 					return done(null, false, { message: "Incorrect password" });
 				}

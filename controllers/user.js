@@ -83,19 +83,18 @@ exports.user_login_post = [
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
 		const user = new User({
-			username: req.body.user,
+			email: req.body.username,
 			password: req.body.password,
 		});
 
 		if (!errors.isEmpty()) {
 			res.render("login", { user: user, errors: errors.array() });
 		} else {
-			console.log("success");
 			return passport.authenticate("local", {
-				successRedirect: "/",
-				failureRedirect: "/",
+				successRedirect: "/sign-up",
+				failureRedirect: "/login",
 				failureMessage: true,
-			});
+			})(req, res, next);
 		}
 	}),
 ];
