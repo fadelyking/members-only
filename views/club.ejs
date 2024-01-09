@@ -6,11 +6,15 @@
 		<title>The Secret Club</title>
 	</head>
 	<body>
+		<% if (user) { %>
 		<form action="" method="post">
 			<label for="club">To join the secret club, enter the club password:</label>
 			<input type="password" name="password" />
 			<label for="submit">Submit</label>
 			<input type="submit" name="submit" />
 		</form>
+		<% } else { %>
+			<%= "Please login" %>
+			<% } %>
 	</body>
 </html>

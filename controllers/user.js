@@ -58,7 +58,7 @@ exports.user_create_post = [
 ];
 
 exports.user_club_get = (req, res, next) => {
-	res.render("club");
+	res.render("club", { user: req.user });
 };
 
 exports.user_club_post = [
@@ -67,7 +67,16 @@ exports.user_club_post = [
 	}),
 
 	asyncHandler(async (req, res, next) => {
-		errors = validationResult(errors);
+		const error = validationResult(req);
+
+		if (!error.isEmpty()) {
+			res.render("club", { error: error });
+		}
+
+		console.log(req.user._id);
+
+		await User.findByIdAndUpdate(req.user._id, { membership_status: 1 });
+		res.redirect("/");
 	}),
 ];
 
