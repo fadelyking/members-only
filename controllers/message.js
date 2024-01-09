@@ -34,3 +34,12 @@ exports.message_create_post = [
 		res.render("index", { messages: messages, user: users });
 	}),
 ];
+
+exports.message_delete_post = asyncHandler(async (req, res, next) => {
+	const messages = Message.find().populate("user").exec();
+
+	const btn = document.querySelector(".delete");
+	btn.addEventListener("click", (e) => {
+		e.target.parentNode;
+	});
+});

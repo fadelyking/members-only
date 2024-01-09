@@ -6,6 +6,7 @@ const user_controller = require("../controllers/user");
 
 router.get("/", message_controller.index);
 router.post("/", message_controller.message_create_post);
+router.post("/", message_controller.message_delete_post);
 router.get("/sign-up", user_controller.user_create_get);
 router.post("/sign-up", user_controller.user_create_post);
 router.get("/login", user_controller.user_login_get);
