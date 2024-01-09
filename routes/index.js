@@ -4,10 +4,8 @@ var router = express.Router();
 const message_controller = require("../controllers/message");
 const user_controller = require("../controllers/user");
 
-router.get("/", function (req, res, next) {
-	res.render("index");
-});
-
+router.get("/", message_controller.index);
+router.post("/", message_controller.message_create_post);
 router.get("/sign-up", user_controller.user_create_get);
 router.post("/sign-up", user_controller.user_create_post);
 router.get("/login", user_controller.user_login_get);
