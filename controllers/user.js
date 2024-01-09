@@ -28,13 +28,15 @@ exports.user_create_post = [
 		bcryptjs.hash(req.body.password, 10, async (err, hashedPassword) => {
 			try {
 				const errors = validationResult(req);
-
+				let adminStatus = false;
+				if (req.body.admin === "on") adminStatus = true;
 				const user = new User({
 					first_name: req.body.name,
 					last_name: req.body.name,
 					email: req.body.email,
 					password: hashedPassword,
 					membership_status: 0,
+					admin: adminStatus,
 				});
 
 				if (!errors.isEmpty()) {
