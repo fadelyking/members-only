@@ -7,7 +7,7 @@ exports.index = asyncHandler(async (req, res, next) => {
 	const users = User.find().exec();
 	const messages = Message.find().populate("user").exec();
 
-	res.render("index", { messages: messages, user: users });
+	res.render("index", { messages: messages, user: req.user });
 });
 
 exports.message_create_post = [
@@ -16,7 +16,7 @@ exports.message_create_post = [
 
 	asyncHandler(async (req, res, next) => {
 		const users = User.find().exec();
-		const messages = Message.find().populate("User").exec();
+		const messages = Message.find().populate("user").exec();
 		const errors = validationResult(req);
 
 		const message = new Message({
