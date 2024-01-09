@@ -100,7 +100,7 @@ exports.user_login_post = [
 			res.render("login", { user: user, errors: errors.array() });
 		} else {
 			return passport.authenticate("local", {
-				successRedirect: "/sign-up",
+				successRedirect: "/",
 				failureRedirect: "/login",
 				failureMessage: true,
 			})(req, res, next);
