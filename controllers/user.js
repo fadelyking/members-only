@@ -1,5 +1,6 @@
 const Message = require("../models/message");
 const User = require("../models/user");
+const passport = require("passport");
 const bcryptjs = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
@@ -53,5 +54,48 @@ exports.user_create_post = [
 				return next(err);
 			}
 		});
+	}),
+];
+
+exports.user_club_get = (req, res, next) => {
+	res.render("club.ejs");
+};
+
+exports.user_club_post = [
+	body("password", "You entered the secret pass code wrong").custom((value) => {
+		return value === "meow";
+	}),
+
+	asyncHandler(async (req, res, next) => {
+		errors = validationResult(errors);
+	}),
+];
+
+exports.user_login_get = asyncHandler(async (req, res, next) => {
+	const user = await User.find().exec();
+
+	res.render("login", { users: user });
+});
+
+exports.user_login_post = [
+	body("username").trim().isLength({ min: 3 }).escape(),
+	body("password").trim().isLength({ min: 3 }).escape(),
+	asyncHandler(async (req, res, next) => {
+		const errors = validationResult(req);
+		const user = new User({
+			username: req.body.user,
+			password: req.body.password,
+		});
+
+		if (!errors.isEmpty()) {
+			res.render("login", { user: user, errors: errors.array() });
+		} else {
+			console.log("success");
+			passport.authenticate("/login", {
+				successRedirect: "/",
+				failureRedirect: "/login",
+				failureMessage: true,
+			});
+		}
 	}),
 ];
