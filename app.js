@@ -39,36 +39,6 @@ app.use(function (req, res, next) {
 	next(createError(404));
 });
 
-passport.use(
-	new LocalStrategy(async (username, password, done) => {
-		try {
-			const user = await User.findOne({ username: username });
-			if (!user) {
-				return done(null, false, { message: "Incorrect username" });
-			}
-			if (user.password !== password) {
-				return done(null, false, { message: "Incorrect password" });
-			}
-			return done(null, user);
-		} catch (err) {
-			return done(err);
-		}
-	})
-);
-
-passport.serializeUser((user, done) => {
-	done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-	try {
-		const user = await User.findById(id);
-		done(null, user);
-	} catch (err) {
-		done(err);
-	}
-});
-
 // error handler
 app.use(function (err, req, res, next) {
 	// set locals, only providing error in development
