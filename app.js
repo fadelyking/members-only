@@ -7,7 +7,7 @@ const logger = require("morgan");
 const User = require("./models/user.js");
 const session = require("express-session");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+require("./config/passport")(passport);
 const indexRouter = require("./routes/index");
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", "false");
@@ -17,6 +17,7 @@ main().catch((err) => console.log(err));
 async function main() {
 	await mongoose.connect(mongoDB);
 }
+
 const app = express();
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
